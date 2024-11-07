@@ -1,0 +1,45 @@
+body{
+    background-color: #111111;
+    display: flex;
+    justify-content: space-between
+}
+nav{
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   width: 5%;
+   padding: 30px 0px;
+   height: 1000px
+}
+.logo_geral{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    justify-content: space-between
+}
+
+.navegation{
+    display: flex;
+    flex-direction: column;
+    height: 35%;
+    align-items: center;
+    justify-content: space-between
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+main{
+    width: 85%;
+}
+iframe{
+    width: 100%;
+    border: none;
+    height: 100%;
+}
+
+
