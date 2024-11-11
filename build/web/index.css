@@ -6,13 +6,62 @@ body{
 * {
     font-family: inter;
 }
+main{
+    display: flex;
+    flex-direction: column;
+}
+.search{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    padding: 30px 0px;
+}
+.search>.button{
+    display: flex;
+    width: 30%;
+    justify-content: end;
+    align-items: center;
+    padding-right: 30px
+}
+.search>.button>button{
+    border: none;
+    background-color: #17E87E;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 10px;
+    width: 20%;
+    cursor: pointer;
+    transition: all .4s;
+}
+.search>.button>button:active{
+    transform: scale(.9)
+}
+.search input{
+    width: 40%;
+    background-color: #111111;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    outline: none;
+    border-radius: 20px;
+    padding: 20px;
+    background-image: url(".././img/image 12.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-position-x: 95%;
+}
+.search input::placeholder{
+    color: #ffffff
+}
 nav{
    display: flex;
    flex-direction: column;
    justify-content: space-between;
    width: 5%;
    padding: 30px 0px;
-   height: 1000px
+   height: 100vh
 }
 .logo_geral{
     display: flex;

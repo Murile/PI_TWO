@@ -8,7 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Music</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./index.css">
+        <link rel="stylesheet" href="./index.css?1422981258">
         <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -25,15 +25,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <a href="" class="playlist" target="main">
                     <img src="./img/image 18.png" alt="alt"/>
                 </a>
-                <a href="./pages/cadastrarMusic.html" class="music" target="main">
+                <a href="./pages/listenMusic.html" class="music" target="main">
                     <img src="./img/fone-de-ouvido 2.png" alt="alt"/>
                 </a>
-                <a href="" class="notication" target="main">
-                    <img src="./img/sino 2.png" alt="alt"/>
+                <a href="./pages/cadastrarMusic.html" class="Plus" target="main">
+                    <img src="./img/Plus.png" alt="alt"/>
                 </a>
             </div>
             <div class="login">
-                <a onclick="handlePopup(true)">
+                <a href="./pages/updateUser.html" target="main">
                     <img src="./img/larissaFoto 1.png" alt="alt"/>
                 </a>
                 <a href="">
@@ -42,6 +42,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
         </nav>
         <main>
+            <div class="search">
+                <input type="text" placeholder="O que você quer ouvir?">
+                <div class="button">
+                    <button type="submit" onclick="handlePopup(true)">Login</button>
+                </div>
+            </div>
             <iframe src="./pages/home.html" name="main" ></iframe>
             <div class="popup" id="popup">
                 <div class="close">
