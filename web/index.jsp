@@ -3,12 +3,21 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
+
+<%
+    String popupLogin = request.getParameter("popup");
+    boolean popupClosed = true;
+    if (popupLogin != null) {
+        popupClosed = Boolean.parseBoolean(popupLogin);
+    }
+%>
+
 <html>
     <head>
         <title>Music</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./index.css?1422981258">
+        <link rel="stylesheet" href="./index.css">
         <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -41,31 +50,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </a>
             </div>
         </nav>
+
         <main>
             <div class="search">
                 <input type="text" placeholder="O que você quer ouvir?">
-                <div class="button">
-                    <button type="submit" onclick="handlePopup(true)">Login</button>
-                </div>
             </div>
             <iframe src="./pages/home.html" name="main" ></iframe>
             <div class="popup" id="popup">
                 <div class="close">
-                    <button type="submit" onclick="handlePopup(false)">
+
+                    <button type="submit" onclick="handlePopup()">
                         <img src="./img/x 2.png" alt=""/>
                     </button>
                 </div>
-                <form action="action">
+                <form action="/pages/login.jsp" method="post">
                     <div>
                         <img src="./img/logo-login.png" alt="alt"/>
                     </div>
                     <div class="title"><h2>Login</h2></div>
                     <div class="login-user">
                         <div>
-                            <input type="text" placeholder="Email">
+                            <input type="text" name ="email" placeholder="Email">
                         </div>
                         <div>
-                            <input type="text" placeholder="Senha">
+                            <input type="text" name="senha" placeholder="Senha">
                         </div>
                     </div>
                     <div class="button">
@@ -82,24 +90,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <img src="./img/x 2.png" alt=""/>
                     </button>
                 </div>
-                <form action="action">
+                <form action="./pages/cadastro.jsp" method="post">
                     <div>
                         <img src="./img/logo-login.png" alt="alt"/>
                     </div>
                     <div class="title"><h2>Cadastro</h2></div>
                     <div class="login-user">
                         <div>
-                            <input type="text" placeholder="Nome">
+                            <input type="text" name="nome" placeholder="nome">
                         </div>
                         <div>
-                            <input type="text" placeholder="Email">
+                            <input type="text" name="email" placeholder="email">
                         </div>
                         <div>
-                            <input type="text" placeholder="Senha">
+                            <input type="text" name="senha" placeholder="senha">
                         </div>
                     </div>
                     <div class="button">
-                        <button>Caedastrar</button>
+                        <button >Cadastrar</button>
                     </div>
                 </form>
             </div>
@@ -107,9 +115,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <script>
             const popup = document.getElementById('popup');
 
-            function handlePopup(open) {
-                popup.classList[open ? 'add' : 'remove']('opened');
+            function handlePopup() {
+                if (<%=popupClosed%>) {
+                    popup.classList.toggle('opened');
             }
+            }
+
+            window.addEventListener("load", (event) => {
+                handlePopup();
+            });
+
+
+
+
             const popup_cad = document.getElementById('popup_cad');
 
             function handlePopupCad(open) {
