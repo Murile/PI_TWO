@@ -10,14 +10,14 @@
     double tempo = 0;
 
     try {
-        // Tenta converter o valor do tempo
+        
         tempo = Double.parseDouble(tempoString);
     } catch (NumberFormatException e) {
         out.print("Erro: O valor do tempo deve ser numérico (ex: 3.45 para 3 minutos e 45 segundos).");
-        return; // Sai do script se houver erro de conversão
+        return; 
     }
 
-    // Conexão com o banco de dados e inserção de dados
+    
     try {
         Connection conecta;
         PreparedStatement st;
