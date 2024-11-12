@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Cadastrar Música</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="./cadastrarMusic.css?1422981258">
@@ -9,36 +10,75 @@
     <body>
         <main>
             <div class="title">
-                <h1>Cadastrar Musica</h1>
+                <h1>Cadastrar Música</h1>
             </div>
-            <form action="action" enctype="multipart/form-data">
+            <form action="cadastrarMusica.jsp" method="post">
                 <div class="form">
                     <div class="inputs">
                         <div>
-                            <input type="text" placeholder="Titulo da musica..... ">
+                            <input type="text" name="titulo" placeholder="Título da música..." required>
                         </div>
                         <div>
-                            <input type="text" placeholder="Artitsta...">
-                        </div>
-                    </div>
-                    <div class="inputs-file">
-                        <div>
-                            <input id="file" type="file">
+                            <input type="text" name="artista" placeholder="Artista..." required>
                         </div>
                     </div>
                 </div>
                 <div class="form">
                     <div class="inputs">
-                        <div><input type="text" placeholder="Tempo....."></div>
+                        <div>
+                            <!-- Campo de entrada do tempo ajustado para aceitar apenas valores numéricos -->
+                            <input type="number" name="tempo" step="0.01" placeholder="Duração (ex: 3.45)" required>
+                        </div>
                     </div>
-                    <div  class="inputs">
-                        <select name="categoria" id="category">
-                            <option value="music">Categoria....</option>
+                    <div class="inputs">
+                        <select name="categoria" id="category" required>
+                            <option value="">Selecione uma categoria...</option>
+                            <option value="1">Rock</option>
+                            <option value="2">Pop</option>
+                            <option value="3">Jazz</option>
+                            <option value="4">Clássica</option>
+                            <option value="5">Hip Hop</option>
+                            <option value="6">Eletrônica</option>
+                            <option value="7">Sertanejo</option>
+                            <option value="8">Samba</option>
+                            <option value="9">Reggae</option>
+                            <option value="10">Blues</option>
+                            <option value="11">Country</option>
+                            <option value="12">Funk</option>
+                            <option value="13">Gospel</option>
+                            <option value="14">MPB</option>
+                            <option value="15">Heavy Metal</option>
+                            <option value="16">R&B</option>
+                            <option value="17">Soul</option>
+                            <option value="18">Instrumental</option>
+                            <option value="19">Forró</option>
+                            <option value="20">Bossa Nova</option>
+                            <option value="21">Pagode</option>
+                            <option value="22">Punk</option>
+                            <option value="23">Disco</option>
+                            <option value="24">Indie</option>
+                            <option value="25">K-pop</option>
+                            <option value="26">Latina</option>
+                            <option value="27">World Music</option>
+                            <option value="28">New Age</option>
+                            <option value="29">Afrobeat</option>
+                            <option value="30">Trap</option>
+                            <option value="31">House</option>
+                            <option value="32">Techno</option>
+                            <option value="33">Dubstep</option>
+                            <option value="34">Classical Crossover</option>
+                            <option value="35">Ambient</option>
+                            <option value="36">Chillout</option>
+                            <option value="37">Dance</option>
+                            <option value="38">Hard Rock</option>
+                            <option value="39">Opera</option>
+                            <option value="40">Grunge</option>
+                            <option value="41">Lo-fi</option>
                         </select>
                     </div>
                 </div>
                 <div class="button">
-                    <button>Cadastrar</button>
+                    <button type="submit">Cadastrar</button>
                 </div>
             </form>
         </main>
