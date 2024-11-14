@@ -6,14 +6,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    // Parâmetros para controle do formulário de edição ou cadastro
+    
     String idMusica = request.getParameter("id_musica");
     String titulo = "";
     String artista = "";
     double tempo = 0.0;
     boolean isEditing = (idMusica != null && !idMusica.isEmpty());
 
-    // Se o ID da música foi passado, carregue os dados para edição
+    
     if (isEditing) {
         try {
             int id = Integer.parseInt(idMusica);
@@ -46,7 +46,7 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
-            // Parâmetros para nova música
+            
             titulo = request.getParameter("titulo");
             artista = request.getParameter("artista");
             tempo = Double.parseDouble(request.getParameter("tempo"));

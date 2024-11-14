@@ -6,7 +6,7 @@
 <%
     Integer userId = (Integer) session.getAttribute("userId");
     if (userId == null) {
-        response.sendRedirect("login.jsp"); // Redireciona para login se o usuário não está logado
+        response.sendRedirect("login.jsp"); 
         return;
     }
 

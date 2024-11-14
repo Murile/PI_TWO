@@ -4,11 +4,11 @@
 <%@page import="java.sql.PreparedStatement"%>
 
 <%
-    // Verifica se o formulário foi submetido
+    
     String email = request.getParameter("email");
     String senha = request.getParameter("senha");
 
-    // Se o email e senha estiverem presentes, processa a atualização
+    
     if (email != null && senha != null) {
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId != null) {

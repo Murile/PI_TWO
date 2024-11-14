@@ -6,14 +6,14 @@
 <%@page import="java.sql.SQLException"%>
 
 <%
-    // Inicializar variáveis
+    
     String idMusica = request.getParameter("id_musica");
     String titulo = "";
     String artista = "";
     double tempo = 0.0;
     String mensagemStatus = null;
 
-    // Verifique se o formulário foi enviado para salvar
+    
     if ("salvar".equals(request.getParameter("acao"))) {
         titulo = request.getParameter("titulo");
         artista = request.getParameter("artista");
@@ -27,7 +27,7 @@
             }
         }
 
-        // Realiza o update no banco de dados, se o id da música foi passado
+        
         if (idMusica != null && !idMusica.isEmpty()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -54,7 +54,7 @@
             }
         }
     } else if (idMusica != null && !idMusica.isEmpty()) {
-        // Carregar dados da música para exibição inicial no formulário
+        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");

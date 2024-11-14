@@ -6,8 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    // Lógica de exclusão
-    String idExcluir = request.getParameter("id_excluir");
+        String idExcluir = request.getParameter("id_excluir");
     if (idExcluir != null && !idExcluir.isEmpty()) {
         try {
             int id = Integer.parseInt(idExcluir);
@@ -21,7 +20,7 @@
             st.close();
             conecta.close();
 
-            // Redireciona de volta para a página atual para atualizar a lista
+            
             response.sendRedirect("listarMusica.jsp");
             return;
 
@@ -63,16 +62,16 @@
                         </div>
                     </div>
                     <div class="function">
-                        <!-- Formulário para exclusão de música -->
+                       
                         <form method="post" action="listarMusica.jsp" style="display:inline;">
                             <input type="hidden" name="id_excluir" value="<%= id %>">
                             <button type="submit" style="background:none; border:none; cursor:pointer;">
-                                <i class="fas fa-times" style="color:white;"></i> <!-- Ícone "X" em branco -->
+                                <i class="fas fa-times" style="color:white;"></i>
                             </button>
                         </form>
-                        <!-- Link de edição para redirecionar à página de edição/cadastro -->
+                        
                         <a href="salvarMusica.jsp?id_musica=<%= id %>" class="edit">
-                            <i class="fas fa-edit"></i> <!-- Ícone de lápis para editar -->
+                            <i class="fas fa-edit"></i> 
                         </a>
                     </div>
                 </div>

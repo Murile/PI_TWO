@@ -10,7 +10,7 @@
         try {
             int id = Integer.parseInt(idParam);
 
-            // Conecta ao banco e executa a exclusão
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 

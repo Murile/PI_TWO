@@ -13,7 +13,7 @@
 </head>
 <body>
    <%
-        // Processamento do Cadastro
+        
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
