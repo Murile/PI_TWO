@@ -13,25 +13,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </head>
     <body>
         <main>
-            <form action="action">
-                <div class="img">
-                    <img src=".././img/image 21.png" alt="alt"/>
-                </div>
-                <div class="update">
-                    <div>
-                        <input type="text" placeholder="Nome">
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Email">
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Senha">
-                    </div>
-                </div>
-                <div class="button">
-                    <button>Editar</button>
-                </div>
-            </form>
+            <form action="atualizarPerfil.jsp" method="post">
+    <div class="img">
+        <img src="../img/image21.png" alt="Imagem de Perfil"/>
+    </div>
+    <div class="update">
+        <div>
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div>
+            <input type="password" name="senha" placeholder="Senha" required>
+        </div>
+    </div>
+    <div class="button">
+        <button type="submit">Salvar Alterações</button>
+    </div>
+</form>
         </main>
     </body>
 </html>

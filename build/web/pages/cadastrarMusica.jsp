@@ -1,42 +1,72 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String titulo = request.getParameter("titulo");
-    String artista = request.getParameter("artista");
-    String tempoString = request.getParameter("tempo");
-    double tempo = 0;
+    // Parâmetros para controle do formulário de edição ou cadastro
+    String idMusica = request.getParameter("id_musica");
+    String titulo = "";
+    String artista = "";
+    double tempo = 0.0;
+    boolean isEditing = (idMusica != null && !idMusica.isEmpty());
 
-    try {
-        
-        tempo = Double.parseDouble(tempoString);
-    } catch (NumberFormatException e) {
-        out.print("Erro: O valor do tempo deve ser numérico (ex: 3.45 para 3 minutos e 45 segundos).");
-        return; 
-    }
+    // Se o ID da música foi passado, carregue os dados para edição
+    if (isEditing) {
+        try {
+            int id = Integer.parseInt(idMusica);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
-    
-    try {
-        Connection conecta;
-        PreparedStatement st;
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            PreparedStatement st = conecta.prepareStatement("SELECT * FROM tb_musica WHERE id_musica = ?");
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
 
-        st = conecta.prepareStatement("INSERT INTO tb_musica (titulo, artista, tempo) VALUES (?, ?, ?)");
-        st.setString(1, titulo);
-        st.setString(2, artista);
-        st.setDouble(3, tempo);
+            if (rs.next()) {
+                titulo = rs.getString("titulo");
+                artista = rs.getString("artista");
+                tempo = rs.getDouble("tempo");
+            }
 
-        st.executeUpdate();
-        out.print("Música cadastrada com sucesso.");
+            rs.close();
+            st.close();
+            conecta.close();
 
-        st.close();
-        conecta.close();
-
-    } catch (Exception x) {
-        out.print("Erro ao inserir no banco: " + x.getMessage());
+        } catch (Exception e) {
+            out.println("<p style='color:red;'>Erro ao carregar dados para edição: " + e.getMessage() + "</p>");
+        }
     }
 %>
+
+<% 
+    if (!isEditing && request.getParameter("titulo") != null && request.getParameter("artista") != null) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+
+            // Parâmetros para nova música
+            titulo = request.getParameter("titulo");
+            artista = request.getParameter("artista");
+            tempo = Double.parseDouble(request.getParameter("tempo"));
+
+            PreparedStatement insertSt = conecta.prepareStatement("INSERT INTO tb_musica (titulo, artista, tempo) VALUES (?, ?, ?)");
+            insertSt.setString(1, titulo);
+            insertSt.setString(2, artista);
+            insertSt.setDouble(3, tempo);
+            insertSt.executeUpdate();
+
+            insertSt.close();
+            conecta.close();
+
+            out.println("<p style='color:green;'>Música cadastrada com sucesso!</p>");
+
+        } catch (Exception e) {
+            out.println("<p style='color:red;'>Erro ao cadastrar música: " + e.getMessage() + "</p>");
+        }
+    }
+%>
+
+
 

@@ -6,28 +6,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    
-    String idParam = request.getParameter("id_musica");
-    if (idParam != null && !idParam.isEmpty()) {
+    // Lógica de exclusão
+    String idExcluir = request.getParameter("id_excluir");
+    if (idExcluir != null && !idExcluir.isEmpty()) {
         try {
-            int id = Integer.parseInt(idParam);
-
-           
+            int id = Integer.parseInt(idExcluir);
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
             PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_musica WHERE id_musica = ?");
             st.setInt(1, id);
-            int rowsAffected = st.executeUpdate();
-
-            if (rowsAffected > 0) {
-                out.println("<p style='color:green;'>Música excluída com sucesso.</p>");
-            } else {
-                out.println("<p style='color:red;'>Música não encontrada.</p>");
-            }
+            st.executeUpdate();
 
             st.close();
             conecta.close();
+
+            // Redireciona de volta para a página atual para atualizar a lista
+            response.sendRedirect("listarMusica.jsp");
+            return;
 
         } catch (Exception e) {
             out.println("<p style='color:red;'>Erro ao excluir música: " + e.getMessage() + "</p>");
@@ -38,6 +34,7 @@
 <html>
 <head>
     <title>Listagem de Músicas</title>
+    <link rel="stylesheet" href="listarMusica.css">
 </head>
 <body>
     <h1>Listagem de Músicas</h1>
@@ -53,28 +50,30 @@
 
             while (rs.next()) {
                 int id = rs.getInt("id_musica");
-                String titulo = rs.getString("titulo");
-                String artista = rs.getString("artista");
-                double tempo = rs.getDouble("tempo");
+                String tituloMusica = rs.getString("titulo");
+                String artistaMusica = rs.getString("artista");
+                double tempoMusica = rs.getDouble("tempo");
     %>
                 <div class="card">
                     <div class="content">
                         <div class="titleMusic">
-                            <p><strong>Título:</strong> <%= titulo %></p>
-                            <p><strong>Artista:</strong> <%= artista %></p>
-                            <p><strong>Duração:</strong> <%= tempo %> min</p>
+                            <p><strong>Título:</strong> <%= tituloMusica %></p>
+                            <p><strong>Artista:</strong> <%= artistaMusica %></p>
+                            <p><strong>Duração:</strong> <%= tempoMusica %> min</p>
                         </div>
                     </div>
                     <div class="function">
-                        
+                        <!-- Formulário para exclusão de música -->
                         <form method="post" action="listarMusica.jsp" style="display:inline;">
-                            <input type="hidden" name="id_musica" value="<%= id %>">
+                            <input type="hidden" name="id_excluir" value="<%= id %>">
                             <button type="submit" style="background:none; border:none; cursor:pointer;">
                                 <i class="fas fa-times" style="color:white;"></i> <!-- Ícone "X" em branco -->
                             </button>
                         </form>
-                        <a href="#" class="plus"><i class="fas fa-plus"></i></a>
-                        <a href="#" class="edit"><i class="fas fa-edit"></i></a>
+                        <!-- Link de edição para redirecionar à página de edição/cadastro -->
+                        <a href="salvarMusica.jsp?id_musica=<%= id %>" class="edit">
+                            <i class="fas fa-edit"></i> <!-- Ícone de lápis para editar -->
+                        </a>
                     </div>
                 </div>
     <%
@@ -89,3 +88,4 @@
     %>
 </body>
 </html>
+
