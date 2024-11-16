@@ -16,7 +16,7 @@
     if (email != null && senha != null) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             String sql = "UPDATE usuario SET email = ?, senha = ? WHERE id_usuario = ?";
             PreparedStatement st = conn.prepareStatement(sql);

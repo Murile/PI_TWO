@@ -5,13 +5,14 @@
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
 <%
-        String idExcluir = request.getParameter("id_excluir");
+    String idExcluir = request.getParameter("id_excluir");
     if (idExcluir != null && !idExcluir.isEmpty()) {
         try {
             int id = Integer.parseInt(idExcluir);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_musica WHERE id_musica = ?");
             st.setInt(1, id);
@@ -20,7 +21,6 @@
             st.close();
             conecta.close();
 
-            
             response.sendRedirect("listarMusica.jsp");
             return;
 
@@ -30,61 +30,69 @@
     }
 %>
 
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Listagem de Músicas</title>
-    <link rel="stylesheet" href="listarMusica.css">
-</head>
-<body>
-    <h1>Listagem de Músicas</h1>
-    <%
-        Connection conecta;
-        PreparedStatement st;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+    <head>
+        <title>Music</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./listenMusic.css?9999999999999">
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="space"></div>
+        <main>
+            <div class="title">
+                <h2>Musicas</h2>
+            </div>
+            <%
+                Connection conecta;
+                PreparedStatement st;
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
-            st = conecta.prepareStatement("SELECT * FROM tb_musica");
-            ResultSet rs = st.executeQuery();
+                    st = conecta.prepareStatement("SELECT * FROM tb_musica");
+                    ResultSet rs = st.executeQuery();
+            %>
 
-            while (rs.next()) {
-                int id = rs.getInt("id_musica");
-                String tituloMusica = rs.getString("titulo");
-                String artistaMusica = rs.getString("artista");
-                double tempoMusica = rs.getDouble("tempo");
-    %>
-                <div class="card">
+            <div class="card">
+                <%while (rs.next()) {%>
+                <div class="musica">
                     <div class="content">
+                        <div class="img">
+                            <img src=".././img/fone-de-ouvido 2.png" alt="alt"/>
+                        </div>
                         <div class="titleMusic">
-                            <p><strong>Título:</strong> <%= tituloMusica %></p>
-                            <p><strong>Artista:</strong> <%= artistaMusica %></p>
-                            <p><strong>Duração:</strong> <%= tempoMusica %> min</p>
+                            <p><strong>Titulo: </strong><%= rs.getString("titulo")%></p>
+                        </div>
+                        <div class="titleMusic">
+                            <p><strong>Tempo: </strong><%= rs.getString("tempo")%></p>
+                        </div>
+                        <div class="titleMusic">
+                            <p><strong>Artista: </strong><%= rs.getString("artista")%></p>
                         </div>
                     </div>
                     <div class="function">
-                       
-                        <form method="post" action="listarMusica.jsp" style="display:inline;">
-                            <input type="hidden" name="id_excluir" value="<%= id %>">
-                            <button type="submit" style="background:none; border:none; cursor:pointer;">
-                                <i class="fas fa-times" style="color:white;"></i>
-                            </button>
-                        </form>
-                        
-                        <a href="salvarMusica.jsp?id_musica=<%= id %>" class="edit">
-                            <i class="fas fa-edit"></i> 
+                        <a href="./deleteMusic.jsp?id_musica=<%= rs.getString("id_musica")%>" class="close" target="main">
+                            <img src=".././img/MacOS Close.png" alt="alt"/>
+                        </a>
+                        <a href="salvarMusica.jsp?id_musica=<%= rs.getString("id_musica")%>" class="edit" target="main">
+                            <img src=".././img/Pencil.png" alt="alt"/>
                         </a>
                     </div>
                 </div>
-    <%
-            }
+                <%}%>
+            </div>
+            <%
+                    rs.close();
+                    st.close();
+                    conecta.close();
+                } catch (Exception x) {
+                    out.print("Erro ao carregar músicas: " + x.getMessage());
+                }
+            %>
 
-            rs.close();
-            st.close();
-            conecta.close();
-        } catch (Exception x) {
-            out.print("Erro ao carregar músicas: " + x.getMessage());
-        }
-    %>
-</body>
+        </main>
+    </body>
 </html>
-

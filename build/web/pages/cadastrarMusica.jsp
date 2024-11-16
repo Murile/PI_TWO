@@ -18,7 +18,7 @@
         try {
             int id = Integer.parseInt(idMusica);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root","1234");
 
             PreparedStatement st = conecta.prepareStatement("SELECT * FROM tb_musica WHERE id_musica = ?");
             st.setInt(1, id);
@@ -44,7 +44,7 @@
     if (!isEditing && request.getParameter("titulo") != null && request.getParameter("artista") != null) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             
             titulo = request.getParameter("titulo");

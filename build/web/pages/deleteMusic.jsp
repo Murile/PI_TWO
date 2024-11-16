@@ -12,14 +12,14 @@
 
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_musica WHERE id_musica = ?");
             st.setInt(1, id);
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {
-                out.print("sucesso"); // Responde com sucesso para o AJAX
+               response.sendRedirect("listarMusica.jsp");
             } else {
                 out.print("Música não encontrada.");
             }

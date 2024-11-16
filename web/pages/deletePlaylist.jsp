@@ -5,7 +5,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    String idParam = request.getParameter("id_musica"); // Obtém o ID da música
+    String idParam = request.getParameter("id_playlist"); // Obtém o ID da música
     if (idParam != null && !idParam.isEmpty()) {
         try {
             int id = Integer.parseInt(idParam);
@@ -14,14 +14,14 @@
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
-            PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_musica WHERE id_musica = ?");
+            PreparedStatement st = conecta.prepareStatement("DELETE FROM playlist WHERE id_playlist = ?");
             st.setInt(1, id);
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {
-               response.sendRedirect("listarMusica.jsp");
+                response.sendRedirect("./listenPlaylist.jsp");
             } else {
-                out.print("Música não encontrada.");
+                out.print("Playlist não encontrada.");
             }
 
             st.close();

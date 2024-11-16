@@ -6,14 +6,13 @@
 <%@page import="java.sql.SQLException"%>
 
 <%
-    
+
     String idMusica = request.getParameter("id_musica");
     String titulo = "";
     String artista = "";
     double tempo = 0.0;
     String mensagemStatus = null;
 
-    
     if ("salvar".equals(request.getParameter("acao"))) {
         titulo = request.getParameter("titulo");
         artista = request.getParameter("artista");
@@ -27,11 +26,10 @@
             }
         }
 
-        
         if (idMusica != null && !idMusica.isEmpty()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
                 String sqlUpdate = "UPDATE tb_musica SET titulo = ?, artista = ?, tempo = ? WHERE id_musica = ?";
                 PreparedStatement stUpdate = conecta.prepareStatement(sqlUpdate);
@@ -54,10 +52,10 @@
             }
         }
     } else if (idMusica != null && !idMusica.isEmpty()) {
-        
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement stSelect = conecta.prepareStatement("SELECT titulo, artista, tempo FROM tb_musica WHERE id_musica = ?");
             stSelect.setInt(1, Integer.parseInt(idMusica));
@@ -82,35 +80,39 @@
 %>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Música</title>
-    <link rel="stylesheet" href="SsalvarMusic.css">
-</head>
-<body>
-    <h2><%= (idMusica != null && !idMusica.isEmpty()) ? "Editar Música" : "Cadastrar Nova Música" %></h2>
-
-    <% if (mensagemStatus != null) { %>
-        <p style="color:<%= mensagemStatus.contains("sucesso") ? "green" : "red" %>;"><%= mensagemStatus %></p>
-    <% } %>
-
-    <form method="post">
-        <input type="hidden" name="id_musica" value="<%= idMusica %>">
-        <input type="hidden" name="acao" value="salvar">
-        
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" value="<%= titulo %>" required><br>
-
-        <label for="artista">Artista:</label>
-        <input type="text" id="artista" name="artista" value="<%= artista %>" required><br>
-
-        <label for="tempo">Tempo (em minutos):</label>
-        <input type="number" id="tempo" name="tempo" step="0.01" value="<%= tempo %>" required><br>
-
-        <button type="submit">Salvar Música</button>
-    </form>
-</body>
+<html>
+    <head>
+        <title>Cadastrar Música</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./cadastrarMusic.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <div class="title">
+                <h1>Alterar Música</h1>
+            </div>
+            <form method="post">
+                <input type="hidden" name="id_musica" value="<%= idMusica%>">
+                <input type="hidden" name="acao" value="salvar">
+                <div class="form">
+                    <div class="inputs">
+                        <div>
+                            <input type="text" id="titulo" name="titulo" value="<%= titulo%>" required>
+                        </div>
+                        <div>
+                            <input id="artista" name="artista" value="<%= artista%>" required>
+                        </div>
+                        <div>
+                            <input type="number"  id="tempo" name="tempo" step="0.01" value="<%= tempo%>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="button">
+                    <button type="submit">Salvar Música</button>
+                </div>
+            </form>
+        </main>
+    </body>
 </html>
-

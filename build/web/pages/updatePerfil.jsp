@@ -14,7 +14,7 @@
         if (userId != null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
                 String sql = "UPDATE usuario SET email = ?, senha = ? WHERE id_usuario = ?";
                 PreparedStatement st = conn.prepareStatement(sql);
@@ -53,9 +53,6 @@
     <main>
         <h1>Atualizar Perfil</h1>
         <form method="post">
-            <div class="img">
-                <img src="../img/image21.png" alt="Imagem de Perfil"/>
-            </div>
             <div class="update">
                 <div>
                     <input type="email" name="email" placeholder="Email" required>

@@ -28,16 +28,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </a>
             </div>
             <div class="navegation">
-                <a href="./index.html" class="home">
+                <a href="/index.jsp?popup=false" class="home">
                     <img src="./img/image 17.png" alt="alt"/>
                 </a>
-                <a href="" class="playlist" target="main">
+                <a href="./pages/listenPlaylist.jsp" class="playlist" target="main">
                     <img src="./img/image 18.png" alt="alt"/>
                 </a>
-                <a href="./pages/listenMusic.html" class="music" target="main">
+                <a href="./pages/listarMusica.jsp" class="music" target="main">
                     <img src="./img/fone-de-ouvido 2.png" alt="alt"/>
                 </a>
-                <a href="./pages/cadastrarMusic.html" class="Plus" target="main">
+                <a href="./pages/cadastraMusi.html" class="Plus" target="main">
                     <img src="./img/Plus.png" alt="alt"/>
                 </a>
             </div>
@@ -53,7 +53,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
         <main>
             <div class="search">
-                <input type="text" placeholder="O que vocÃª quer ouvir?">
+                <input type="text" placeholder="O que você quer ouvir?">
             </div>
             <iframe src="./pages/home.html" name="main" ></iframe>
             <div class="popup" id="popup">
@@ -73,7 +73,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <input type="text" name ="email" placeholder="Email">
                         </div>
                         <div>
-                            <input type="text" name="senha" placeholder="Senha">
+                            <input type="password" name="senha" placeholder="Senha">
                         </div>
                     </div>
                     <div class="button">
@@ -103,7 +103,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <input type="text" name="email" placeholder="email">
                         </div>
                         <div>
-                            <input type="text" name="senha" placeholder="senha">
+                            <input type="password" name="senha" placeholder="senha">
                         </div>
                     </div>
                     <div class="button">
