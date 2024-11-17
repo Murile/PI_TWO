@@ -41,7 +41,7 @@
                 int rowsUpdated = stUpdate.executeUpdate();
                 stUpdate.close();
                 conecta.close();
-
+                response.sendRedirect("./listarMusica.jsp");
                 if (rowsUpdated > 0) {
                     mensagemStatus = "Música atualizada com sucesso!";
                 } else {

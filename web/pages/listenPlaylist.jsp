@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Music</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="./listenPlaylis.css">
+        <link rel="stylesheet" href="./listenPlaylis.css?999999">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
     <body>
@@ -19,7 +19,6 @@
             <div class="content">
                 <div class="title">
                     <h2>My Playlist</h2>
-
                 </div>
                 <div>
                     <div class="open" type="submit" onclick="handlePopupCad(true)">
@@ -46,7 +45,7 @@
                         <img src=".././img/image 28.png" />
                     </div>
                     <div class="titlePaylist">
-                        <div><%= rs.getString("nome")%></div>
+                        <a href="./listenMusicPlay.jsp"><%= rs.getString("nome")%></a>
                         <a class="remove" href="./deletePlaylist.jsp?id_playlist=<%= rs.getString("id_playlist")%>">
                             <img src=".././img/x 2.png" alt=""/>
                         </a>
