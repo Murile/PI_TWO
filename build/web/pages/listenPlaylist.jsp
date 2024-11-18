@@ -31,7 +31,7 @@
                 PreparedStatement st1;
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
                     st1 = conecta.prepareStatement("select id_playlist, nome from playlist;");
                     ResultSet rs = st1.executeQuery();
@@ -45,7 +45,7 @@
                         <img src=".././img/image 28.png" />
                     </div>
                     <div class="titlePaylist">
-                        <a href="./listenMusicPlay.jsp"><%= rs.getString("nome")%></a>
+                        <a href="./listenMusicPlay.jsp?id_playlist=<%= rs.getString("id_playlist")%>"><%= rs.getString("nome")%></a>
                         <a class="remove" href="./deletePlaylist.jsp?id_playlist=<%= rs.getString("id_playlist")%>">
                             <img src=".././img/x 2.png" alt=""/>
                         </a>

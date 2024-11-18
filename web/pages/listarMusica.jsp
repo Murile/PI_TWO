@@ -12,7 +12,7 @@
         try {
             int id = Integer.parseInt(idExcluir);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_musica WHERE id_musica = ?");
             st.setInt(1, id);
@@ -50,7 +50,7 @@
                 PreparedStatement st;
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
                     st = conecta.prepareStatement("SELECT * FROM tb_musica");
                     ResultSet rs = st.executeQuery();

@@ -18,30 +18,39 @@
         <div class="space"></div>
         <main>
             <%
-                Connection conecta;
-                PreparedStatement st, st1, st2;
+                Connection conecta = null;
+                PreparedStatement st = null, st1 = null, st2 = null;
+                ResultSet rs = null, rs1 = null, rs2 = null;
+                String idParam = request.getParameter("id_playlist");
                 try {
+                    int id = Integer.parseInt(idParam);
+
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
-                    
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+
                     st1 = conecta.prepareStatement("SELECT id_musica, titulo FROM tb_musica");
-                    ResultSet rs1 = st1.executeQuery();
+                    rs1 = st1.executeQuery();
 
-                    st2 = conecta.prepareStatement("select nome from playlist;");
-                    ResultSet rs2 = st2.executeQuery();
+                    st2 = conecta.prepareStatement("SELECT id_playlist, nome FROM playlist WHERE id_playlist = ?;");
+                    st2.setInt(1, id);
+                    rs2 = st2.executeQuery();
 
-                    st = conecta.prepareStatement("SELECT pm.id_playMusic, m.titulo AS titulo_musica, m.artista AS artista_musica, "
-                            + "m.tempo AS tempo_musica, p.nome AS nome_playlist, p.id_playlist "
+                    st = conecta.prepareStatement(
+                            "SELECT pm.id_playMusic, m.titulo AS titulo_musica, m.artista AS artista_musica, "
+                            + "m.id_musica, m.tempo AS tempo_musica, p.nome AS nome_playlist, p.id_playlist "
                             + "FROM tb_playMusic AS pm "
                             + "INNER JOIN tb_musica AS m ON pm.id_musica = m.id_musica "
-                            + "INNER JOIN playlist AS p ON pm.id_playlist = p.id_playlist;");
-                    ResultSet rs = st.executeQuery();
-                    
+                            + "INNER JOIN playlist AS p ON pm.id_playlist = p.id_playlist "
+                            + "WHERE p.id_playlist = ?;"
+                    );
+                    st.setInt(1, id);
+                    rs = st.executeQuery();
+
                     if (rs2.next()) {
             %>
             <div class="top">
                 <div class="title">
-                    <h2><%= rs2.getString("nome") %></h2>
+                    <h2><%= rs2.getString("nome")%></h2>
                 </div>
                 <div class="open" type="submit" onclick="handlePopupCad(true)">
                     <button>Adicionar Música</button>
@@ -59,12 +68,12 @@
                     </div>
                     <div class="title"><h2>Adicionar Música</h2></div>
                     <div class="login-user">
-                        <input type="hidden" name="id_playlist" value="<%= rs2.getString("id_playlist") %>" />
+                        <input type="hidden" name="id_playlist" value="<%= rs2.getString("id_playlist")%>" />
                         <select name="titulo" id="titulo">
                             <%
                                 while (rs1.next()) {
                             %>
-                            <option value="<%= rs1.getString("id_musica") %>"><%= rs1.getString("titulo") %></option>
+                            <option value="<%= rs1.getString("id_musica")%>"><%= rs1.getString("titulo")%></option>
                             <%
                                 }
                             %>
@@ -75,39 +84,61 @@
                     </div>
                 </form>
             </div>
-            <% } %>
             <div class="card">
-                <% while (rs.next()) { %>
+                <% while (rs.next()) {%>
                 <div class="musica">
                     <div class="content">
                         <div class="img">
                             <img src=".././img/fone-de-ouvido 2.png" alt="alt"/>
                         </div>
                         <div class="titleMusic">
-                            <p><strong>Título: </strong><%= rs.getString("titulo_musica") %></p>
+                            <p><strong>Título: </strong><%= rs.getString("titulo_musica")%></p>
                         </div>
                         <div class="titleMusic">
-                            <p><strong>Tempo: </strong><%= rs.getString("tempo_musica") %></p>
+                            <p><strong>Tempo: </strong><%= rs.getString("tempo_musica")%></p>
                         </div>
                         <div class="titleMusic">
-                            <p><strong>Artista: </strong><%= rs.getString("artista_musica") %></p>
+                            <p><strong>Artista: </strong><%= rs.getString("artista_musica")%></p>
                         </div>
                     </div>
                     <div class="function">
-                        <a href="./deletarMusiPlay.jsp?id_playlist=<%= rs.getString("pm.id_playMusic") %>" class="close" target="main">
+                        <a href="./deletarMusiPlay.jsp?id_playlist=<%= rs.getString("id_playMusic")%>" class="close" target="main">
                             <img src=".././img/MacOS Close.png" alt="alt"/>
                         </a>
                     </div>
                 </div>
                 <% } %>
             </div>
-
+            <% } %>
             <%
-                    rs.close();
-                    st.close();
-                    conecta.close();
                 } catch (Exception x) {
-                    out.print("Erro ao carregar músicas: " + x.getMessage());
+                    out.print("<p>Erro ao carregar músicas: " + x.getMessage() + "</p>");
+                } finally {
+                    try {
+                        if (rs != null) {
+                            rs.close();
+                        }
+                        if (rs1 != null) {
+                            rs1.close();
+                        }
+                        if (rs2 != null) {
+                            rs2.close();
+                        }
+                        if (st != null) {
+                            st.close();
+                        }
+                        if (st1 != null) {
+                            st1.close();
+                        }
+                        if (st2 != null) {
+                            st2.close();
+                        }
+                        if (conecta != null) {
+                            conecta.close();
+                        }
+                    } catch (SQLException e) {
+                        out.println("<p>Erro ao fechar recursos: " + e.getMessage() + "</p>");
+                    }
                 }
             %>
             <script>

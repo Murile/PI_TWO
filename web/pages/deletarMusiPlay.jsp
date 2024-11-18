@@ -12,7 +12,7 @@
 
             
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement st = conecta.prepareStatement("DELETE FROM tb_playMusic WHERE id_playMusic = ?");
             st.setInt(1, id);

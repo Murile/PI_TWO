@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
 <%
     String popupLogin = request.getParameter("popup");
+    String id = request.getParameter("id");
     boolean popupClosed = true;
     if (popupLogin != null) {
         popupClosed = Boolean.parseBoolean(popupLogin);
@@ -28,7 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </a>
             </div>
             <div class="navegation">
-                <a href="/index.jsp?popup=false" class="home">
+                <a href="" class="home">
                     <img src="./img/image 17.png" alt="alt"/>
                 </a>
                 <a href="./pages/listenPlaylist.jsp" class="playlist" target="main">
@@ -42,10 +43,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </a>
             </div>
             <div class="login">
-                <a href="./pages/updateUser.html" target="main">
+                <a href="./pages/updateUser.jsp?id=<%=id%>" target="main">
                     <img src="./img/larissaFoto 1.png" alt="alt"/>
                 </a>
-                <a href="">
+                <a href="/">
                     <img src="./img/poder 2.png" alt="alt"/>
                 </a>
             </div>

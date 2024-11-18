@@ -22,7 +22,7 @@
         if (nome != null && email != null && senha != null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
                 st = conn.prepareStatement("INSERT INTO usuario(nome, email, senha) VALUES (?, ?, ?)");
                 st.setString(1, nome);
                 st.setString(2, email);

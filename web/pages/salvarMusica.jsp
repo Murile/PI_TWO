@@ -29,7 +29,7 @@
         if (idMusica != null && !idMusica.isEmpty()) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+                Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
                 String sqlUpdate = "UPDATE tb_musica SET titulo = ?, artista = ?, tempo = ? WHERE id_musica = ?";
                 PreparedStatement stUpdate = conecta.prepareStatement(sqlUpdate);
@@ -55,7 +55,7 @@
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
             PreparedStatement stSelect = conecta.prepareStatement("SELECT titulo, artista, tempo FROM tb_musica WHERE id_musica = ?");
             stSelect.setInt(1, Integer.parseInt(idMusica));

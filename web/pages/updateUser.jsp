@@ -1,43 +1,84 @@
-<%@page import="java.sql.DriverManager" %>
-<%@page import="java.sql.Connection" %>
-<%@page import="java.sql.PreparedStatement" %>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.SQLException"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%
-    String email = request.getParameter("email");
-    String senha = request.getParameter("senha");
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Atualizar Usu√°rio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./updateUser.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@100..900&family=Judson:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <%
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String idParam = request.getParameter("id");
 
-    
-    Integer userId = (Integer) session.getAttribute("userId");
-    String mensagemStatus = null;
+            String mensagemStatus = null;
+            Connection conn = null;
+            PreparedStatement stUpdate = null;
+            PreparedStatement st = null;
+            ResultSet rs = null;
 
-    if (userId != null && email != null && senha != null) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
+            try {
+                if (idParam != null && !idParam.trim().isEmpty()) {
+                    int id = Integer.parseInt(idParam);
 
-            
-            String sqlUpdate = "UPDATE usuario SET email = ?, senha = ? WHERE id_usuario = ?";
-            PreparedStatement stUpdate = conn.prepareStatement(sqlUpdate);
-            stUpdate.setString(1, email);
-            stUpdate.setString(2, senha); 
-            stUpdate.setInt(3, userId);
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
 
-            int rowsUpdated = stUpdate.executeUpdate();
-            if (rowsUpdated > 0) {
-                mensagemStatus = "Usu·rio atualizado com sucesso!";
-            } else {
-                mensagemStatus = "Erro: Nenhuma alteraÁ„o foi realizada.";
+                    String sqlUpdate = "UPDATE usuario SET email = ?, senha = ? WHERE id_usuario = ?";
+                    stUpdate = conn.prepareStatement(sqlUpdate);
+                    stUpdate.setString(1, email);
+                    stUpdate.setString(2, senha);
+                    stUpdate.setInt(3, id);
+
+                    int rowsUpdated = stUpdate.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        out.print("Usu√°rio atualizado com sucesso!");
+                    } else {
+                        mensagemStatus = "Erro: Nenhuma altera√ß√£o foi realizada.";
+                    }
+
+                    String sqlSelect = "SELECT * FROM usuario WHERE id_usuario = ?";
+                    st = conn.prepareStatement(sqlSelect);
+                    st.setInt(1, id);
+                    rs = st.executeQuery();
+
+                    if (rs.next()) {
+        %>
+        <main>
+            <form action="./updateUser.jsp" method="post">
+                <div class="update">
+                    <input type="hidden" name="id" value="<%= idParam%>" required>
+                    <div>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div>
+                        <input type="password" name="senha" placeholder="Senha" required>
+                    </div>
+                </div>
+                <div class="button">
+                    <button type="submit">Salvar Altera√ß√µes</button>
+                </div>
+            </form>
+        </main>
+        <%
+                    } else {
+                        mensagemStatus = "Erro: Usu√°rio n√£o encontrado.";
+                    }
+                } else {
+                    mensagemStatus = "Erro: ID inv√°lido.";
+                }
+            } catch (Exception e) {
+                mensagemStatus = "Erro ao processar a atualiza√ß√£o: " + e.getMessage();
             }
-
-            stUpdate.close();
-            conn.close();
-
-        } catch (Exception e) {
-            mensagemStatus = "Erro ao processar a atualizaÁ„o: " + e.getMessage();
-        }
-    } else {
-        mensagemStatus = "Erro: Usu·rio n„o autenticado ou dados incompletos.";
-    }
-
-    out.println("<p>" + mensagemStatus + "</p>");
-%>
+        %>
+    </body>
+</html>
