@@ -26,7 +26,7 @@
                     int id = Integer.parseInt(idParam);
 
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
                     st1 = conecta.prepareStatement("SELECT id_musica, titulo FROM tb_musica");
                     rs1 = st1.executeQuery();

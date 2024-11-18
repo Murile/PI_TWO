@@ -31,7 +31,7 @@
                 PreparedStatement st1;
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+                    conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
                     st1 = conecta.prepareStatement("select id_playlist, nome from playlist;");
                     ResultSet rs = st1.executeQuery();

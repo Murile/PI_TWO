@@ -14,7 +14,7 @@
     if (email != null && senha != null) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
             String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, email);

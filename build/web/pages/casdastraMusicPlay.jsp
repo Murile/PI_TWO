@@ -8,7 +8,7 @@
     String titulo, idParam;
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+        Connection conecta = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
         titulo = request.getParameter("titulo");
         idParam = request.getParameter("id_playlist");

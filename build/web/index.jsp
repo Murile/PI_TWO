@@ -44,7 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
             <div class="login">
                 <a href="./pages/updateUser.jsp?id=<%=id%>" target="main">
-                    <img src="./img/larissaFoto 1.png" alt="alt"/>
+                    <img src="./img/User.png" alt="alt"/>
                 </a>
                 <a href="/">
                     <img src="./img/poder 2.png" alt="alt"/>

@@ -31,7 +31,7 @@
                     int id = Integer.parseInt(idParam);
 
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "1234");
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cenna", "root", "TbX77HHVdbXWca");
 
                     String sqlUpdate = "UPDATE usuario SET email = ?, senha = ? WHERE id_usuario = ?";
                     stUpdate = conn.prepareStatement(sqlUpdate);
@@ -40,11 +40,7 @@
                     stUpdate.setInt(3, id);
 
                     int rowsUpdated = stUpdate.executeUpdate();
-                    if (rowsUpdated > 0) {
-                        out.print("Usuário atualizado com sucesso!");
-                    } else {
-                        mensagemStatus = "Erro: Nenhuma alteração foi realizada.";
-                    }
+                    
 
                     String sqlSelect = "SELECT * FROM usuario WHERE id_usuario = ?";
                     st = conn.prepareStatement(sqlSelect);
